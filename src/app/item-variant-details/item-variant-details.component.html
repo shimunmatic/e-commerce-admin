@@ -1,0 +1,73 @@
+<div *ngIf="variant">
+  <form>
+    <div class="row">
+      <div class="col-md-5 pr-1">
+        <div class="form-group">
+          <div class="author">
+            <img
+              *ngIf="variant?.thumbnail"
+              width="150px"
+              height="150px"
+              [src]="cdnUrl + variant?.thumbnail"
+              alt="Thumbnail Not Found"
+            />
+            <img
+              *ngIf="variant?.thumbnail == null"
+              width="150px"
+              height="150px"
+              src="https://applehurst.com/wp-content/plugins/wp-ulike/assets/img/no-thumbnail.png"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7 px-1">
+        <label>Thumbnail</label>
+        <input
+          type="file"
+          class="form-control"
+          [disabled]="variant.id == null"
+          (change)="fileChange($event)"
+          placeholder="Upload thumbnail"
+          accept="image/*"
+        />
+        <div class="form-group">
+          <label>Name</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="e.g. Electronics"
+            [(ngModel)]="variant.name"
+            name="name"
+          />
+        </div>
+        <div class="form-group">
+          <label>Base Price</label>
+          <input
+            type="decimal"
+            class="form-control"
+            placeholder="99.99"
+            [(ngModel)]="variant.basePrice"
+            name="basePrice"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <label>Description</label>
+          <textarea
+            rows="4"
+            cols="80"
+            class="form-control"
+            placeholder="variant description..."
+            [(ngModel)]="variant.description"
+            name="description"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" (click)="saveVariant()">Save</button>
+  </form>
+</div>

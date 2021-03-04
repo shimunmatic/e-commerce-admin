@@ -1,0 +1,35 @@
+<div class="panel-header">
+  <div class="header text-center">
+    <h2 class="title">Items</h2>
+  </div>
+</div>
+<div class="main-content">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="single item">
+            <ul class="list-unstyled">
+              <li (click)="newItem()">
+                <a class="new-item">New Item</a>
+              </li>
+              <li *ngFor="let item of items" (click)="itemClicked(item)">
+                <a *ngIf="selectedItem?.id == item.id" class="selectedrow"
+                  >{{ item.name }} <span class="pull-right">></span></a
+                >
+                <a *ngIf="selectedItem?.id != item.id">{{ item.name }} </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <app-item-details
+            [item]="selectedItem"
+            [categories]="categories"
+            (onItemChange)="itemChanged($event)"
+          ></app-item-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

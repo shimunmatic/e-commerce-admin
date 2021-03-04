@@ -1,0 +1,41 @@
+<div class="panel-header">
+  <div class="header text-center">
+    <h2 class="title">Categories</h2>
+    <p class="category"></p>
+  </div>
+</div>
+<div class="main-content">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="single category">
+            <ul class="list-unstyled">
+              <li (click)="newCategory()">
+                <a class="new-category">New Category</a>
+              </li>
+              <li
+                *ngFor="let category of categories"
+                (click)="categoryClicked(category)"
+              >
+                <a *ngIf="selectedCategory?.id == category.id" class="selectedrow"
+                  >{{ category.name }} <span class="pull-right">></span></a
+                >
+                <a *ngIf="selectedCategory?.id != category.id"
+                  >{{ category.name }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <app-category-details
+            [category]="selectedCategory"
+            [categories]="categories"
+            (onCategoryChange)="categoryChanged($event)"
+          ></app-category-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

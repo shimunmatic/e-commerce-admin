@@ -1,0 +1,10 @@
+.toggle-button {
+    display: block;
+    margin: 5px;
+}
+
+@media (min-width: 1400px) {
+    .toggle-button {
+        display: none;
+    }
+}

@@ -1,0 +1,80 @@
+<form>
+  <div class="row">
+    <div class="col-md-3 pr-1">
+      <div class="form-group">
+        <div class="author">
+          <img *ngIf="category.thumbnail !== null"
+            width="150px"
+            height="150px"
+            [src]="cdnUrl + category?.thumbnail"
+            alt="Thumbnail Not Found"
+          />
+          <img
+            *ngIf="category.thumbnail == null"
+            width="150px"
+            height="150px"
+            src="https://applehurst.com/wp-content/plugins/wp-ulike/assets/img/no-thumbnail.png"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 px-1">
+      <label>Thumbnail</label>
+      <input
+      type="file"
+      class="form-control"
+      [disabled]="category.id == null"
+      (change)="fileChange($event)"
+      placeholder="Upload thumbnail"
+      accept="image/*"
+    />
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="e.g. Electronics"
+          [(ngModel)]="category.name"
+          name="name"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Description</label>
+        <textarea
+          rows="4"
+          cols="80"
+          class="form-control"
+          placeholder="Category description..."
+          [(ngModel)]="category.description"
+          name="description"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label>Parent Category</label>
+      <div class="form-group">
+        <select
+          class="form-control"
+          [(ngModel)]="category.parentId"
+          name="parentId"
+        >
+          <option>No Parent</option>
+          <option [value]="cat.id" *ngFor="let cat of categories">
+            {{ cat.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="saveCategory()">Save</button>
+</form>
